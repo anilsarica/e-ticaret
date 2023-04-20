@@ -10,6 +10,7 @@ import { toast } from "react-toastify"
 import { useDispatch } from 'react-redux'
 import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from '../../redux/slice/authSlice'
 import { ShowOnLogin, ShowOnLogout } from '../hiddenLink/hiddenLink'
+import { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyRoute'
 
 const Header = () => {
 
@@ -96,6 +97,13 @@ const Header = () => {
               {logo}
               <FaTimes size={22} color="#fff" onClick={hideMenu}/>
             </li>
+            <AdminOnlyLink>
+              <Link to="/admin/home">
+              <li>
+                <button className='--btn --btn-primary'>Admin</button>
+              </li>
+              </Link>
+            </AdminOnlyLink>
             <li>
               <NavLink to="/" className={activeLink}>Home</NavLink>
             </li>
@@ -105,12 +113,12 @@ const Header = () => {
           </ul>
           <div className={styles["header-right"]} onClick={hideMenu}>
             <span className={styles.links}>
-              <ShowOnLogin>
+              <ShowOnLogout>
 
               <NavLink to="/login" className={activeLink}>Login</NavLink>
-              </ShowOnLogin>
+              </ShowOnLogout>
 
-              <ShowOnLogout>
+              <ShowOnLogin>
 
               <a href='#home' style={{color: '#ff7722'}}> 
                 <FaUserCircle size={16}/>&nbsp;
@@ -119,7 +127,7 @@ const Header = () => {
               <NavLink to="/order-history" className={activeLink}>My Orders</NavLink>
 
               <NavLink to="/" onClick={logoutUser}>Logout</NavLink>
-              </ShowOnLogout>
+              </ShowOnLogin>
 
             </span>
             {cart}
